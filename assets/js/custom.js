@@ -71,7 +71,13 @@ function fetchRecommends(res) {
         }
         var nextdiv = document.createElement("a");
         nextdiv.id = 'change_arrowicon'
-        nextdiv.className = 'glyph-icon flaticon-down-arrow';
+        //nextdiv.className = 'glyph-icon flaticon-down-arrow';
+
+        var arrImg = document.createElement("img");
+        arrImg.id = 'arrow_img';
+        arrImg.src = 'assets/images/down-arrow-sc.svg';
+        nextdiv.appendChild(arrImg);
+
         nextdiv.href = "javascript:show_nextitem();"
 
         document.getElementById('recommended_app_section').appendChild(nextdiv);
@@ -428,19 +434,19 @@ function googleAds() {
                 console.log('showing ads ....');
 
                 if (event.slot.getAdUnitPath() == arrAds[0]) {
-                    //document.getElementById('top_news_ads1').style.display = 'block';
-                    document.querySelector('#div-gpt-ad-1551357349271-9 div iframe').onload = function(){ 
-                        document.getElementById('top_news_ads1').style.display = 'block';
-                        console.log("Ad 1 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
-                    }
+                    document.getElementById('top_news_ads1').style.display = 'block';
+                    // document.querySelector('#div-gpt-ad-1551357349271-9 div iframe').onload = function(){ 
+                    //     document.getElementById('top_news_ads1').style.display = 'block';
+                    //     console.log("Ad 1 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
+                    // }
                 }
 
                 if (event.slot.getAdUnitPath() == arrAds[1]) {
-                    //document.getElementById('top_news_ads2').style.display = 'block';
-                    document.querySelector('#div-gpt-ad-1565767605361-0 div iframe').onload = function(){
-                        document.getElementById('top_news_ads2').style.display = 'block';
-                        console.log("Ad 2 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
-                    }
+                    document.getElementById('top_news_ads2').style.display = 'block';
+                    // document.querySelector('#div-gpt-ad-1565767605361-0 div iframe').onload = function(){
+                    //     document.getElementById('top_news_ads2').style.display = 'block';
+                    //     console.log("Ad 2 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
+                    // }
                 }
             });
 
@@ -486,3 +492,23 @@ setTimeout(function () {
 
 }, 12000);
 
+function show_nextitem() {
+
+    var current_status = document.getElementsByClassName('fourinch')[0].style.display;
+    var arrow_el = document.getElementById("change_arrowicon");
+    var x = document.getElementsByClassName('fourinch');
+
+    var arrImg = document.getElementById('arrow_img');
+    if (current_status == "none" || current_status == "") {
+        arrImg.src = 'assets/images/up-arrow-sc.svg';
+        for (var i = 0; i < x.length; i++) {
+            x[i].style.display = "block";
+        }
+    } else {
+        arrImg.src = 'assets/images/down-arrow-sc.svg';
+        for (var i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+
+    }
+}
