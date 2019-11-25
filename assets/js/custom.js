@@ -166,7 +166,7 @@ const renderNews = data => {
                                 </div>
                                 <b id="news_heading_0" class="bwrap">${i.title}</b>
                                 <div class="source_image">
-                                    <h6 id="publishTime_0" class="publishTime">${timeSince(i.publishTime)}</h6>
+                                    <h6 id="publishTime_0" class="publishTime" data-publish-ts="${timeSince(i.publishTime)}">${timeSince(i.publishTime)}</h6>
                                 </div>
                             </div>
                         </div>
@@ -189,7 +189,7 @@ const renderNews = data => {
                             </div>
                             <b id="news_heading_${idx}" class="bwrap">${i.title}</b>
                             <div class="source_image">
-                                <h6 id="publishTime_${idx}" class="publishTime">${timeSince(i.publishTime)}</h6>
+                                <h6 id="publishTime_${idx}" class="publishTime" data-publish-ts="${timeSince(i.publishTime)}">${timeSince(i.publishTime)}</h6>
                             </div>
                         </div>
                         <div class="col-xs-3" id="pic">
