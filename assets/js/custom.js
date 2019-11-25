@@ -434,19 +434,19 @@ function googleAds() {
                 console.log('showing ads ....');
 
                 if (event.slot.getAdUnitPath() == arrAds[0]) {
-                    document.getElementById('top_news_ads1').style.display = 'block';
-                    // document.querySelector('#div-gpt-ad-1551357349271-9 div iframe').onload = function(){ 
-                    //     document.getElementById('top_news_ads1').style.display = 'block';
-                    //     console.log("Ad 1 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
-                    // }
+                    //document.getElementById('top_news_ads1').style.display = 'block';
+                    document.querySelector('#div-gpt-ad-1551357349271-9 div iframe').onload = function(){ 
+                        document.getElementById('top_news_ads1').style.display = 'block';
+                        console.log("Ad 1 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
+                    }
                 }
 
                 if (event.slot.getAdUnitPath() == arrAds[1]) {
-                    document.getElementById('top_news_ads2').style.display = 'block';
-                    // document.querySelector('#div-gpt-ad-1565767605361-0 div iframe').onload = function(){
-                    //     document.getElementById('top_news_ads2').style.display = 'block';
-                    //     console.log("Ad 2 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
-                    // }
+                    //document.getElementById('top_news_ads2').style.display = 'block';
+                    document.querySelector('#div-gpt-ad-1565767605361-0 div iframe').onload = function(){
+                        document.getElementById('top_news_ads2').style.display = 'block';
+                        console.log("Ad 2 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
+                    }
                 }
             });
 
