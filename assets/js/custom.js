@@ -1,3 +1,5 @@
+var allNews = [];
+
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM fully loaded and parsed');
     fetchNews();
@@ -130,9 +132,10 @@ const fetchNews = async (query) => {
 // RENDER NEWS TO THE DOM
 const renderNews = data => {
     if (data && data.count > 0) {
+
         let newsFragment = new DocumentFragment();
         console.log("Creating news feed DOM....");
-
+        data.rows = data.rows.sort((a,b) => { return b.publishTime - a.publishTime });
         data.rows.forEach((i, idx) => {
             let li = document.createElement('li');
             li.id = `top_news_${idx}`;
@@ -166,7 +169,7 @@ const renderNews = data => {
                                 </div>
                                 <b id="news_heading_0" class="bwrap">${i.title}</b>
                                 <div class="source_image">
-                                    <h6 id="publishTime_0" class="publishTime" data-publish-ts="${timeSince(i.publishTime)}">${timeSince(i.publishTime)}</h6>
+                                    <h6 id="publishTime_0" class="publishTime" data-publish-ts="${i.publishTime}">${timeSince(i.publishTime)}</h6>
                                 </div>
                             </div>
                         </div>
@@ -189,7 +192,7 @@ const renderNews = data => {
                             </div>
                             <b id="news_heading_${idx}" class="bwrap">${i.title}</b>
                             <div class="source_image">
-                                <h6 id="publishTime_${idx}" class="publishTime" data-publish-ts="${timeSince(i.publishTime)}">${timeSince(i.publishTime)}</h6>
+                                <h6 id="publishTime_${idx}" class="publishTime" data-publish-ts="${i.publishTime}">${timeSince(i.publishTime)}</h6>
                             </div>
                         </div>
                         <div class="col-xs-3" id="pic">
