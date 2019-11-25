@@ -1,6 +1,25 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM fully loaded and parsed');
     fetchNews();
+    //CSS CLASSES SETUP: based on device
+    var mql = window.matchMedia('(max-width: 699px)');
+    if (mql.matches) {
+        document.querySelector('#indus_cont').classList.remove("indus_middle");;
+    }
+    mql = window.matchMedia('(max-width:339px)');
+    if (mql.matches) {
+        document.querySelector('#indus_cont_five').classList.add("indus_middle_five");;
+    }
+    mql = window.matchMedia('(max-width: 399px)');
+    if (mql.matches) {
+        var sel = '#all_news';
+        var coll = document.querySelector(sel).classList.add('lessthan400');
+
+    } else {
+        var sel = '#all_news';
+        var coll = document.querySelector(sel).classList.add('morethan400');
+    }
+
 });
 
 // APPEND SITEPLUG SCRIPT
@@ -22,6 +41,7 @@ function fetchRecommends(res) {
         let news_node = document.createElement('div');
         news_node.classList.add('col-xs-3');
         news_node.classList.add('panel');
+        news_node.classList.add('fig_div');
         news_node.id = `fig_div_${i}`;
         let img_src = data[i]['iurl'].replace('36x36', '128x128');
 
@@ -42,6 +62,21 @@ function fetchRecommends(res) {
 
     // attach recFragment to main DOM
     recommended_app_section_node.appendChild(recFragment);
+
+    mql = window.matchMedia('(max-width: 320px)');
+    if (mql.matches) {
+        var icoColl = document.querySelectorAll('.fig_div:nth-last-child(-n+4)');
+        for (var i = 0; i < icoColl.length; i++) {
+            icoColl[i].classList.add('fourinch');
+        }
+        var nextdiv = document.createElement("a");
+        nextdiv.id = 'change_arrowicon'
+        nextdiv.className = 'glyph-icon flaticon-down-arrow';
+        nextdiv.href = "javascript:show_nextitem();"
+
+        document.getElementById('recommended_app_section').appendChild(nextdiv);
+    }
+    flag_var = 1;
 }
 
 // FETCH NEWS
@@ -379,15 +414,33 @@ function googleAds() {
             let adSlot1, adSlot2;
             var arrAds = ['/42115163/IP_start.indusos.com_320X100_Mobile', '/42115163/IP_start.indusos.com_300X250_Mobile'];
 
+            googletag.pubads().addEventListener('slotRequested', function(event) {
+                if(event.slot.getAdUnitPath() == arrAds[0])
+                console.log("Ad 1 has been requested@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;');
+
+                if(event.slot.getAdUnitPath() == arrAds[1])
+                console.log("Ad 2 has been requested@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;'); 
+
+                ///DEBUG 
+            });
+
             googletag.pubads().addEventListener('slotRenderEnded', function (event) {
                 console.log('showing ads ....');
 
                 if (event.slot.getAdUnitPath() == arrAds[0]) {
-                    document.getElementById('top_news_ads1').style.display = 'block';
+                    //document.getElementById('top_news_ads1').style.display = 'block';
+                    document.querySelector('#div-gpt-ad-1551357349271-9 div iframe').onload = function(){ 
+                        document.getElementById('top_news_ads1').style.display = 'block';
+                        console.log("Ad 1 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
+                    }
                 }
 
                 if (event.slot.getAdUnitPath() == arrAds[1]) {
-                    document.getElementById('top_news_ads2').style.display = 'block';
+                    //document.getElementById('top_news_ads2').style.display = 'block';
+                    document.querySelector('#div-gpt-ad-1565767605361-0 div iframe').onload = function(){
+                        document.getElementById('top_news_ads2').style.display = 'block';
+                        console.log("Ad 2 iframe[Ad content] loaded@: %c" + (Date.now()-timerStart) + ' ms', 'color:green;font-weight:bold');
+                    }
                 }
             });
 
@@ -433,20 +486,3 @@ setTimeout(function () {
 
 }, 12000);
 
-//CSS CLASSES SETUP: based on device
-var mql = window.matchMedia('(max-width: 699px)');
-if (mql.matches) {
-    document.querySelector('#indus_cont').classList.remove("indus_middle");;
-}
-mql = window.matchMedia('(max-width:339px)');
-if (mql.matches) {
-    document.querySelector('#indus_cont_five').classList.add("indus_middle_five");;
-}
-mql = window.matchMedia('(max-width: 399px)');
-if (mql.matches) {
-    var sel = '#all_news';
-    var coll = document.querySelector(sel).classList.add('lessthan400');
-} else {
-    var sel = '#all_news';
-    var coll = document.querySelector(sel).classList.add('morethan400');
-}
